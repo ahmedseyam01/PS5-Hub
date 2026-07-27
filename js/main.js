@@ -196,12 +196,18 @@ function initMenuCart() {
     const priceText = priceEl.textContent.replace(/[^0-9]/g, '');
     const price = parseInt(priceText) || 0;
 
+    const rightGroup = document.createElement('div');
+    rightGroup.className = 'd-flex align-items-center gap-2 ms-auto';
+
     const addBtn = document.createElement('button');
-    addBtn.className = 'btn btn-sm btn-outline-danger ms-2 rounded-circle py-0 px-2 btn-add-menu';
+    addBtn.className = 'btn btn-sm btn-outline-danger rounded-circle py-0 px-2 btn-add-menu';
     addBtn.innerHTML = '<i class="bi bi-plus-lg"></i>';
     addBtn.setAttribute('title', `Add ${name} to order`);
 
-    item.appendChild(addBtn);
+    item.removeChild(priceEl);
+    rightGroup.appendChild(priceEl);
+    rightGroup.appendChild(addBtn);
+    item.appendChild(rightGroup);
 
     addBtn.addEventListener('click', () => {
       addToCart(name, price);

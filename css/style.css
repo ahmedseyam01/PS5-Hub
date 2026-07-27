@@ -349,6 +349,7 @@ h1, h2, h3, h4, h5, h6, .navbar-brand-ps {
   align-items: center;
   padding: 0.95rem 0;
   border-bottom: 1px dashed rgba(226, 232, 240, 0.9);
+  gap: 1rem;
 }
 
 .menu-item:last-child {
@@ -358,6 +359,7 @@ h1, h2, h3, h4, h5, h6, .navbar-brand-ps {
 .menu-name {
   font-weight: 600;
   color: #0f172a;
+  flex: 1;
 }
 
 .menu-price-blue {
