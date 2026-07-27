@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initNavbarScroll();
   initThemeToggle();
   initGameCardModals();
-  initRateCalculator();
   initMenuCart();
   initReservationForm();
   initTooltipsAndToasts();
@@ -156,113 +155,7 @@ function openGameModal(game) {
 }
 
 /* ----------------------------------------------------
- * 2. Interactive Live Rate & Bill Estimator Calculator
- * ---------------------------------------------------- */
-function initRateCalculator() {
-  const ratesSection = document.getElementById('rates');
-  if (!ratesSection) return;
-
-  const calcWrapper = document.createElement('div');
-  calcWrapper.className = 'mt-5 p-4 bg-white rounded-4 shadow-sm border border-danger border-opacity-25';
-  calcWrapper.innerHTML = `
-    <div class="row align-items-center g-4">
-      <div class="col-12 col-lg-5">
-        <h3 class="h5 fw-bold text-dark mb-1"><i class="bi bi-calculator-fill text-danger me-2"></i>Quick Gaming Price Calculator</h3>
-        <p class="text-muted small mb-3">Calculate your session cost with discount estimation in real-time.</p>
-        
-        <div class="mb-3">
-          <label class="form-label text-muted small fw-semibold">Station Type</label>
-          <select id="calcType" class="form-select form-select-ps">
-            <option value="40">Single Player (40 EGP/h)</option>
-            <option value="65" selected>Multi-Player 2-4 Players (65 EGP/h)</option>
-            <option value="110">VIP Private AC Room (110 EGP/h)</option>
-          </select>
-        </div>
-
-        <div class="mb-3">
-          <div class="d-flex justify-content-between">
-            <label class="form-label text-muted small fw-semibold">Number of Hours</label>
-            <span id="calcHoursLabel" class="fw-bold text-danger">2 Hours</span>
-          </div>
-          <input type="range" id="calcHours" class="form-range" min="1" max="8" value="2" step="0.5">
-        </div>
-
-        <div class="form-check form-switch mb-3">
-          <input class="form-check-input" type="checkbox" id="calcExtraControllers">
-          <label class="form-check-label text-muted small fw-semibold" for="calcExtraControllers">
-            Add Extra DualSense Controller (+15 EGP/h)
-          </label>
-        </div>
-      </div>
-
-      <div class="col-12 col-lg-7">
-        <div class="bg-subtle-section p-4 rounded-4 text-center border">
-          <span class="text-muted small text-uppercase fw-bold tracking-wider d-block mb-1">Estimated Total Session Cost</span>
-          <div class="d-flex justify-content-center align-items-baseline gap-2 mb-2">
-            <span id="calcTotalCost" class="display-4 fw-bold text-dark">130</span>
-            <span class="fs-4 text-muted fw-bold">EGP</span>
-          </div>
-          <div id="calcDiscountBadge" class="badge bg-success-subtle text-success px-3 py-2 rounded-pill d-none mb-3">
-            <i class="bi bi-percent me-1"></i> 10% Long Session Discount Applied!
-          </div>
-
-          <div class="d-flex flex-wrap justify-content-center gap-2">
-            <button id="calcBookBtn" class="btn btn-ps-red px-4">
-              <i class="bi bi-whatsapp me-1"></i> Book Estimated Session on WhatsApp
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  `;
-
-  ratesSection.querySelector('.container').appendChild(calcWrapper);
-
-  const calcType = calcWrapper.querySelector('#calcType');
-  const calcHours = calcWrapper.querySelector('#calcHours');
-  const calcHoursLabel = calcWrapper.querySelector('#calcHoursLabel');
-  const calcExtra = calcWrapper.querySelector('#calcExtraControllers');
-  const calcTotal = calcWrapper.querySelector('#calcTotalCost');
-  const calcDiscountBadge = calcWrapper.querySelector('#calcDiscountBadge');
-  const calcBookBtn = calcWrapper.querySelector('#calcBookBtn');
-
-  function updateCost() {
-    const ratePerHour = parseFloat(calcType.value);
-    const hours = parseFloat(calcHours.value);
-    const extraRate = calcExtra.checked ? 15 : 0;
-    
-    calcHoursLabel.textContent = `${hours} Hour${hours > 1 ? 's' : ''}`;
-
-    let total = (ratePerHour + extraRate) * hours;
-    
-    // 10% discount if 3 hours or more
-    if (hours >= 3) {
-      total = total * 0.9;
-      calcDiscountBadge.classList.remove('d-none');
-    } else {
-      calcDiscountBadge.classList.add('d-none');
-    }
-
-    calcTotal.textContent = Math.round(total);
-  }
-
-  calcType.addEventListener('change', updateCost);
-  calcHours.addEventListener('input', updateCost);
-  calcExtra.addEventListener('change', updateCost);
-
-  calcBookBtn.addEventListener('click', () => {
-    const typeName = calcType.options[calcType.selectedIndex].text;
-    const hours = calcHours.value;
-    const total = calcTotal.textContent;
-    const msg = `Hello PlayStation Hub! I want to book: ${typeName} for ${hours} hours. Total estimated cost: ${total} EGP.`;
-    window.open(`https://wa.me/201205298585?text=${encodeURIComponent(msg)}`, '_blank');
-  });
-
-  updateCost();
-}
-
-/* ----------------------------------------------------
- * 5. Interactive Drinks & Snacks Order Cart
+ * 4. Interactive Drinks & Snacks Order Cart
  * ---------------------------------------------------- */
 const cartState = [];
 
