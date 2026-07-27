@@ -63,6 +63,7 @@ function initThemeToggle() {
 }
 
 function initScrollReveal() {
+  document.body.classList.add('js-reveal');
   const reveals = document.querySelectorAll('.reveal');
   if (!('IntersectionObserver' in window)) {
     reveals.forEach(el => el.classList.add('active'));
@@ -102,8 +103,10 @@ function initParticleCanvas() {
   let width, height;
 
   function resize() {
-    width = canvas.width = window.innerWidth;
-    height = canvas.height = window.innerHeight;
+    const isGlobal = canvas.classList.contains('global-particle-canvas');
+    const parent = canvas.parentElement;
+    width = canvas.width = isGlobal ? window.innerWidth : (parent ? parent.offsetWidth : window.innerWidth);
+    height = canvas.height = isGlobal ? window.innerHeight : (parent ? parent.offsetHeight : window.innerHeight);
   }
   resize();
   window.addEventListener('resize', resize);
