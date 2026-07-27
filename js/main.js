@@ -5,6 +5,11 @@ document.addEventListener('DOMContentLoaded', () => {
   initMenuCart();
   initReservationForm();
   initTooltipsAndToasts();
+  initScrollReveal();
+  initParticleCanvas();
+  init3DTilt();
+  initCounterAnim();
+  initRippleEffect();
 });
 
 function initNavbarScroll() {
@@ -57,6 +62,208 @@ function initThemeToggle() {
   });
 }
 
+/* ----------------------------------------------------
+ * Scroll Reveal Animations (Intersection Observer)
+ * ---------------------------------------------------- */
+function initScrollReveal() {
+  const reveals = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window)) {
+    reveals.forEach(el => el.classList.add('active'));
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+      }
+    });
+  }, {
+    threshold: 0.12,
+    rootMargin: '0px 0px -40px 0px'
+  });
+
+  reveals.forEach(el => observer.observe(el));
+}
+
+/* ----------------------------------------------------
+ * PlayStation Floating Symbol Canvas Animation
+ * ---------------------------------------------------- */
+function initParticleCanvas() {
+  const canvas = document.getElementById('psParticleCanvas');
+  if (!canvas) return;
+
+  const ctx = canvas.getContext('2d');
+  let width, height;
+
+  function resize() {
+    width = canvas.width = canvas.parentElement.offsetWidth;
+    height = canvas.height = canvas.parentElement.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const shapes = ['▲', '●', '✖', '■'];
+  const colors = ['#00b06f', '#e60012', '#0070d1', '#df0067'];
+
+  const particles = [];
+  const count = Math.min(Math.floor(width / 35), 28);
+
+  for (let i = 0; i < count; i++) {
+    particles.push({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      size: Math.random() * 14 + 12,
+      shape: shapes[Math.floor(Math.random() * shapes.length)],
+      color: colors[Math.floor(Math.random() * colors.length)],
+      vx: (Math.random() - 0.5) * 0.4,
+      vy: (Math.random() - 0.5) * 0.4,
+      rotation: Math.random() * Math.PI * 2,
+      vRot: (Math.random() - 0.5) * 0.015,
+      alpha: Math.random() * 0.35 + 0.15
+    });
+  }
+
+  let mouseX = width / 2;
+  let mouseY = height / 2;
+  canvas.parentElement.addEventListener('mousemove', (e) => {
+    const rect = canvas.getBoundingClientRect();
+    mouseX = e.clientX - rect.left;
+    mouseY = e.clientY - rect.top;
+  });
+
+  function draw() {
+    ctx.clearRect(0, 0, width, height);
+
+    particles.forEach(p => {
+      p.x += p.vx;
+      p.y += p.vy;
+      p.rotation += p.vRot;
+
+      if (p.x < -20) p.x = width + 20;
+      if (p.x > width + 20) p.x = -20;
+      if (p.y < -20) p.y = height + 20;
+      if (p.y > height + 20) p.y = -20;
+
+      // Gentle mouse interaction
+      const dx = mouseX - p.x;
+      const dy = mouseY - p.y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < 120) {
+        p.x -= (dx / dist) * 0.8;
+        p.y -= (dy / dist) * 0.8;
+      }
+
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rotation);
+      ctx.globalAlpha = p.alpha;
+      ctx.font = `bold ${p.size}px Outfit, sans-serif`;
+      ctx.fillStyle = p.color;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(p.shape, 0, 0);
+      ctx.restore();
+    });
+
+    requestAnimationFrame(draw);
+  }
+
+  draw();
+}
+
+/* ----------------------------------------------------
+ * 3D Interactive Card Tilt & Parallax Effect
+ * ---------------------------------------------------- */
+function init3DTilt() {
+  const cards = document.querySelectorAll('.ps-card, .game-card, .hero-img-scaled');
+
+  cards.forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+
+      const rotateX = ((y - centerY) / centerY) * -6;
+      const rotateY = ((x - centerX) / centerX) * 6;
+
+      card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-6px)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)`;
+    });
+  });
+}
+
+/* ----------------------------------------------------
+ * Number Counter Animation for Stats
+ * ---------------------------------------------------- */
+function initCounterAnim() {
+  const statNums = document.querySelectorAll('.stat-num');
+  if (statNums.length === 0) return;
+
+  let animated = false;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !animated) {
+        animated = true;
+        statNums.forEach(numEl => {
+          const target = parseFloat(numEl.getAttribute('data-target'));
+          const decimals = parseInt(numEl.getAttribute('data-decimals')) || 0;
+          const duration = 1800; // ms
+          const startTime = performance.now();
+
+          function updateNum(currentTime) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const easeProgress = 1 - Math.pow(1 - progress, 3); // Ease out cubic
+            const currentVal = target * easeProgress;
+
+            numEl.textContent = currentVal.toFixed(decimals);
+
+            if (progress < 1) {
+              requestAnimationFrame(updateNum);
+            }
+          }
+
+          requestAnimationFrame(updateNum);
+        });
+      }
+    });
+  }, { threshold: 0.5 });
+
+  const heroSection = document.querySelector('.hero-ps');
+  if (heroSection) observer.observe(heroSection);
+}
+
+/* ----------------------------------------------------
+ * Button Ripple Click Animation
+ * ---------------------------------------------------- */
+function initRippleEffect() {
+  const buttons = document.querySelectorAll('.btn-ps-blue, .btn-ps-red, .btn-ps-outline');
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', function (e) {
+      const rect = this.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      const ripple = document.createElement('span');
+      ripple.className = 'btn-ps-ripple';
+      ripple.style.left = `${x}px`;
+      ripple.style.top = `${y}px`;
+
+      this.appendChild(ripple);
+
+      setTimeout(() => ripple.remove(), 600);
+    });
+  });
+}
+
 const GAMES_DATA = [
   { id: 1, title: 'EA Sports FC 25', category: 'Sports', rating: '4.9', players: '1-4 Players', img: 'images/game-fifa.jpg', desc: 'Latest rosters, Ultimate Team, and local kick-off tournaments.' },
   { id: 2, title: 'TEKKEN 8', category: 'Fighting', rating: '4.8', players: '1-2 Players', img: 'images/game-tekken.jpg', desc: 'Next-gen fighting graphics, 32 fighters, high speed combat.' },
@@ -69,7 +276,7 @@ function initGameCardModals() {
   cards.forEach((card, index) => {
     card.style.cursor = 'pointer';
     card.setAttribute('title', 'Click to view game details');
-    
+
     card.addEventListener('click', () => {
       const game = GAMES_DATA[index] || GAMES_DATA[0];
       openGameModal(game);
@@ -147,7 +354,7 @@ function initMenuCart() {
   menuItems.forEach((item) => {
     const nameEl = item.querySelector('.menu-name');
     const priceEl = item.querySelector('[class^="menu-price"]');
-    
+
     if (!nameEl || !priceEl) return;
 
     const name = nameEl.textContent.trim();
@@ -375,3 +582,4 @@ function showToast(message) {
     setTimeout(() => toastEl.remove(), 300);
   }, 4000);
 }
+

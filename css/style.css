@@ -6,7 +6,13 @@ body {
   overflow-x: hidden;
 }
 
-h1, h2, h3, h4, h5, h6, .navbar-brand-ps {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.navbar-brand-ps {
   font-family: 'Outfit', system-ui, -apple-system, sans-serif;
   font-weight: 700;
   letter-spacing: -0.02em;
@@ -178,10 +184,22 @@ h1, h2, h3, h4, h5, h6, .navbar-brand-ps {
   height: 38px;
   margin-bottom: 0;
 }
-.sym-triangle { color: #00b06f; }
-.sym-circle { color: #e60012; }
-.sym-cross { color: #0070d1; }
-.sym-square { color: #df0067; }
+
+.sym-triangle {
+  color: #00b06f;
+}
+
+.sym-circle {
+  color: #e60012;
+}
+
+.sym-cross {
+  color: #0070d1;
+}
+
+.sym-square {
+  color: #df0067;
+}
 
 .ps-card {
   background: #ffffff;
@@ -448,7 +466,8 @@ h1, h2, h3, h4, h5, h6, .navbar-brand-ps {
   height: 100%;
 }
 
-.form-control-ps, .form-select-ps {
+.form-control-ps,
+.form-select-ps {
   background-color: #ffffff;
   border: 1px solid rgba(226, 232, 240, 0.9);
   border-radius: 10px;
@@ -458,7 +477,8 @@ h1, h2, h3, h4, h5, h6, .navbar-brand-ps {
   transition: all 0.2s ease;
 }
 
-.form-control-ps:focus, .form-select-ps:focus {
+.form-control-ps:focus,
+.form-select-ps:focus {
   border-color: #e60012;
   box-shadow: 0 0 0 4px rgba(230, 0, 18, 0.12);
 }
@@ -493,6 +513,302 @@ h1, h2, h3, h4, h5, h6, .navbar-brand-ps {
   background-color: #ffffff;
   border-top: 3px solid #e60012;
   padding: 2.5rem 0 1.5rem;
+}
+
+/* ----------------------------------------------------
+ * PlayStation Hub - Animations & Motion System
+ * ---------------------------------------------------- */
+
+/* Keyframe Animations */
+@keyframes heroFloat {
+
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-10px) rotate(0.5deg);
+  }
+}
+
+@keyframes badgePulse {
+
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(230, 0, 18, 0.4);
+  }
+
+  50% {
+    box-shadow: 0 0 0 10px rgba(230, 0, 18, 0);
+  }
+}
+
+@keyframes neonGlowBlue {
+
+  0%,
+  100% {
+    filter: drop-shadow(0 0 5px rgba(0, 112, 209, 0.4));
+  }
+
+  50% {
+    filter: drop-shadow(0 0 15px rgba(0, 112, 209, 0.8));
+  }
+}
+
+@keyframes neonGlowRed {
+
+  0%,
+  100% {
+    filter: drop-shadow(0 0 5px rgba(230, 0, 18, 0.4));
+  }
+
+  50% {
+    filter: drop-shadow(0 0 15px rgba(230, 0, 18, 0.8));
+  }
+}
+
+@keyframes shimmerPass {
+  0% {
+    transform: translateX(-100%) rotate(25deg);
+  }
+
+  100% {
+    transform: translateX(200%) rotate(25deg);
+  }
+}
+
+@keyframes symbolSpin {
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+
+  50% {
+    transform: scale(1.25) rotate(180deg);
+  }
+
+  100% {
+    transform: scale(1) rotate(360deg);
+  }
+}
+
+@keyframes rippleExpand {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 0.6;
+  }
+
+  100% {
+    width: 300px;
+    height: 300px;
+    opacity: 0;
+  }
+}
+
+@keyframes announcementFire {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.2);
+    text-shadow: 0 0 8px #fff;
+  }
+}
+
+/* Announcement Bar Animation */
+.top-announcement-bar .bi-fire {
+  display: inline-block;
+  animation: announcementFire 1.5s infinite ease-in-out;
+}
+
+/* Hero Canvas & Dynamic Elements */
+.global-particle-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero-particle-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+header, main, footer, .top-announcement-bar {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-ps {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(237, 245, 253, 0.85) 55%, rgba(255, 245, 245, 0.85) 100%);
+  padding: 5.5rem 0 4.5rem;
+  border-bottom: 1px solid rgba(226, 232, 240, 0.9);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-ps .container {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-img-scaled {
+  animation: heroFloat 6s ease-in-out infinite;
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease;
+  will-change: transform;
+}
+
+.hero-badge-floating {
+  animation: heroFloat 5s ease-in-out infinite 1s;
+}
+
+.badge-status-red {
+  animation: badgePulse 2.5s infinite;
+}
+
+/* PS Symbols Bar Micro-Interactions */
+.ps-symbols-bar {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.ps-symbols-bar:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 8px 24px rgba(0, 112, 209, 0.15);
+}
+
+.ps-symbols-bar span {
+  display: inline-block;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: pointer;
+}
+
+.ps-symbols-bar span:hover {
+  transform: translateY(-4px) scale(1.4) rotate(15deg);
+}
+
+/* Ripple Button Effect */
+.btn-ps-blue,
+.btn-ps-red,
+.btn-ps-outline {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-ps-ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.45);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  animation: rippleExpand 0.6s ease-out forwards;
+}
+
+/* Card Shimmer & 3D Tilt */
+.ps-card,
+.game-card,
+.faq-card {
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+  will-change: transform;
+  transform-style: preserve-3d;
+}
+
+.ps-card-featured-blue::before,
+.ps-card-featured-red::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -50%;
+  width: 30%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  transform: skewX(-20deg);
+  pointer-events: none;
+  animation: shimmerPass 4s infinite ease-in-out;
+}
+
+/* Scroll Reveal Base Classes */
+.reveal {
+  opacity: 0;
+  transform: translateY(35px);
+  transition: opacity 0.75s cubic-bezier(0.215, 0.61, 0.355, 1), transform 0.75s cubic-bezier(0.215, 0.61, 0.355, 1);
+  will-change: opacity, transform;
+}
+
+.reveal.reveal-left {
+  transform: translateX(-40px);
+}
+
+.reveal.reveal-right {
+  transform: translateX(40px);
+}
+
+.reveal.reveal-scale {
+  transform: scale(0.9) translateY(20px);
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0) translateX(0) scale(1);
+}
+
+/* Stagger Delay Utilities */
+.stagger-1 {
+  transition-delay: 0.1s;
+}
+
+.stagger-2 {
+  transition-delay: 0.2s;
+}
+
+.stagger-3 {
+  transition-delay: 0.3s;
+}
+
+.stagger-4 {
+  transition-delay: 0.4s;
+}
+
+/* Interactive Hover Glow for Icons */
+.icon-box-badge {
+  transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+.ps-card:hover .icon-box-badge {
+  transform: scale(1.15) rotate(-5deg);
+}
+
+.icon-box-blue:hover {
+  background-color: #0070d1;
+  color: #ffffff;
+  box-shadow: 0 6px 16px rgba(0, 112, 209, 0.35);
+}
+
+.icon-box-red:hover {
+  background-color: #e60012;
+  color: #ffffff;
+  box-shadow: 0 6px 16px rgba(230, 0, 18, 0.35);
+}
+
+/* Animated Modal Pop-In */
+.modal.fade .modal-dialog {
+  transform: scale(0.85) translateY(20px);
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.modal.show .modal-dialog {
+  transform: scale(1) translateY(0);
 }
 
 /* ----------------------------------------------------
@@ -544,8 +860,15 @@ header.scrolled {
 }
 
 @keyframes floatUp {
-  from { transform: translateY(30px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 /* Crimson Spiderman/Kratos Theme Variant */
@@ -568,7 +891,8 @@ body.theme-red .brand-badge-blue {
   box-shadow: 0 4px 14px rgba(230, 0, 18, 0.3);
 }
 
-body.theme-red .nav-link-ps:hover, body.theme-red .nav-link-ps.active {
+body.theme-red .nav-link-ps:hover,
+body.theme-red .nav-link-ps.active {
   color: #e60012 !important;
   background-color: #feeaea;
 }
@@ -581,4 +905,3 @@ body.theme-red .btn-ps-outline {
 body.theme-red .btn-ps-outline:hover {
   background-color: #feeaea;
 }
-
