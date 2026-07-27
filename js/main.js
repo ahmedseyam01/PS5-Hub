@@ -146,7 +146,7 @@ function openGameModal(game) {
       const bsModal = bootstrap.Modal.getInstance(modalEl);
       if (bsModal) bsModal.hide();
       setTimeout(() => {
-        window.open(`https://wa.me/201000000000?text=${encodeURIComponent(msg)}`, '_blank');
+        window.open(`https://wa.me/201205298585?text=${encodeURIComponent(msg)}`, '_blank');
       }, 600);
     });
   }
@@ -255,7 +255,7 @@ function initRateCalculator() {
     const hours = calcHours.value;
     const total = calcTotal.textContent;
     const msg = `Hello PlayStation Hub! I want to book: ${typeName} for ${hours} hours. Total estimated cost: ${total} EGP.`;
-    window.open(`https://wa.me/201000000000?text=${encodeURIComponent(msg)}`, '_blank');
+    window.open(`https://wa.me/201205298585?text=${encodeURIComponent(msg)}`, '_blank');
   });
 
   updateCost();
@@ -433,7 +433,7 @@ function openCartModal() {
     sendBtn.addEventListener('click', () => {
       const itemsList = cartState.map(i => `• ${i.name} (x${i.qty})`).join('%0A');
       const msg = `Hello! I would like to order the following drinks/snacks to my station:%0A${itemsList}%0ATotal: ${totalPrice} EGP`;
-      window.open(`https://wa.me/201000000000?text=${msg}`, '_blank');
+      window.open(`https://wa.me/201205298585?text=${msg}`, '_blank');
     });
   }
 
@@ -463,7 +463,7 @@ function initReservationForm() {
     // Open WhatsApp pre-filled message
     const msg = `Hello PlayStation Hub! My name is ${name} (${phone}). I would like to reserve: ${roomText}. Please confirm availability.`;
     setTimeout(() => {
-      window.open(`https://wa.me/201000000000?text=${encodeURIComponent(msg)}`, '_blank');
+      window.open(`https://wa.me/201205298585?text=${encodeURIComponent(msg)}`, '_blank');
     }, 1200);
 
     form.reset();
