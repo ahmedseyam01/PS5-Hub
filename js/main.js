@@ -371,7 +371,9 @@ function initTooltipsAndToasts() {
   if (!toastContainer) {
     toastContainer = document.createElement('div');
     toastContainer.id = 'psToastContainer';
-    toastContainer.className = 'toast-container position-fixed bottom-0 end-0 p-3';
+    toastContainer.className = 'toast-container position-fixed p-3';
+    toastContainer.style.bottom = '88px';
+    toastContainer.style.right = '24px';
     toastContainer.style.zIndex = '9999';
     document.body.appendChild(toastContainer);
   }
