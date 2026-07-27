@@ -96,6 +96,26 @@ h6,
   background-color: #e6f1fc;
 }
 
+.hero-ps {
+  background: linear-gradient(135deg, #ffffff 0%, #edf5fd 55%, #fff5f5 100%);
+  padding: 5.5rem 0 4.5rem;
+  border-bottom: 1px solid rgba(226, 232, 240, 0.9);
+  position: relative;
+}
+
+.hero-title {
+  font-size: 2.7rem;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.2;
+}
+
+@media (min-width: 992px) {
+  .hero-title {
+    font-size: 3.5rem;
+  }
+}
+
 .badge-status-red {
   background-color: #feeaea;
   color: #e60012;
@@ -121,6 +141,32 @@ h6,
   font-weight: 600;
   color: #475569;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+}
+
+.hero-img-scaled {
+  max-width: 86%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  border-radius: 18px;
+  box-shadow: 0 12px 32px rgba(0, 112, 209, 0.12);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+}
+
+.hero-badge-floating {
+  position: absolute;
+  bottom: 12px;
+  left: 8%;
+  background-color: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+  padding: 0.4rem 0.85rem;
+  box-shadow: 0 10px 25px rgba(0, 112, 209, 0.12), 0 4px 10px rgba(0, 0, 0, 0.06);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
 }
 
 .ps-symbols-bar {
@@ -153,6 +199,24 @@ h6,
 
 .sym-square {
   color: #df0067;
+}
+
+.ps-card {
+  background: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  border-top: 4px solid #0070d1;
+  border-radius: 16px;
+  padding: 1.9rem;
+  height: 100%;
+  box-shadow: 0 10px 30px rgba(0, 112, 209, 0.06), 0 2px 8px rgba(0, 0, 0, 0.03);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.ps-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(0, 112, 209, 0.4);
+  box-shadow: 0 20px 40px rgba(0, 112, 209, 0.14), 0 6px 12px rgba(0, 0, 0, 0.04);
 }
 
 .ps-card-featured-blue {
@@ -221,6 +285,43 @@ h6,
   font-size: 0.9rem;
   color: #64748b;
   font-weight: 500;
+}
+
+.icon-box-badge {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35rem;
+  margin-bottom: 1rem;
+}
+
+.icon-box-blue {
+  background-color: #e6f1fc;
+  color: #0070d1;
+}
+
+.icon-box-red {
+  background-color: #feeaea;
+  color: #e60012;
+}
+
+.game-card {
+  background-color: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 112, 209, 0.06), 0 2px 8px rgba(0, 0, 0, 0.03);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.game-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(0, 112, 209, 0.14), 0 6px 12px rgba(0, 0, 0, 0.04);
+  border-color: #0070d1;
 }
 
 .game-img-wrapper {
@@ -297,6 +398,74 @@ h6,
   font-size: 0.9rem;
 }
 
+.btn-ps-blue {
+  background: linear-gradient(135deg, #0070d1 0%, #0056a3 100%);
+  color: #ffffff !important;
+  font-weight: 700;
+  border: none;
+  padding: 0.75rem 1.6rem;
+  border-radius: 10px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 6px 18px rgba(0, 112, 209, 0.3);
+  transition: all 0.25s ease;
+}
+
+.btn-ps-blue:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(0, 112, 209, 0.45);
+}
+
+.btn-ps-red {
+  background: linear-gradient(135deg, #e60012 0%, #b8000e 100%);
+  color: #ffffff !important;
+  font-weight: 700;
+  border: none;
+  padding: 0.75rem 1.6rem;
+  border-radius: 10px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 6px 18px rgba(230, 0, 18, 0.3);
+  transition: all 0.25s ease;
+}
+
+.btn-ps-red:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(230, 0, 18, 0.45);
+}
+
+.btn-ps-outline {
+  background-color: #ffffff;
+  color: #0070d1 !important;
+  border: 2px solid #0070d1;
+  font-weight: 700;
+  padding: 0.7rem 1.5rem;
+  border-radius: 10px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.25s ease;
+}
+
+.btn-ps-outline:hover {
+  background-color: #e6f1fc;
+  transform: translateY(-2px);
+}
+
+.faq-card {
+  background-color: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.02);
+  height: 100%;
+}
+
 .form-control-ps,
 .form-select-ps {
   background-color: #ffffff;
@@ -316,6 +485,11 @@ h6,
 
 .section-space {
   padding: 5.5rem 0;
+}
+
+.bg-subtle-section {
+  background-color: #ffffff;
+  border-y: 1px solid rgba(226, 232, 240, 0.9);
 }
 
 .section-heading {
@@ -341,6 +515,11 @@ h6,
   padding: 2.5rem 0 1.5rem;
 }
 
+/* ----------------------------------------------------
+ * PlayStation Hub - Animations & Motion System
+ * ---------------------------------------------------- */
+
+/* Keyframe Animations */
 @keyframes heroFloat {
 
   0%,
@@ -440,11 +619,13 @@ h6,
   }
 }
 
+/* Announcement Bar Animation */
 .top-announcement-bar .bi-fire {
   display: inline-block;
   animation: announcementFire 1.5s infinite ease-in-out;
 }
 
+/* Hero Canvas & Dynamic Elements */
 .global-particle-canvas {
   position: fixed;
   top: 0;
@@ -453,6 +634,16 @@ h6,
   height: 100vh;
   pointer-events: none;
   z-index: 0;
+}
+
+.hero-particle-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
 }
 
 header,
@@ -471,52 +662,18 @@ footer,
   overflow: hidden;
 }
 
-.bg-subtle-section {
-  background-color: rgba(255, 255, 255, 0.82);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-}
-
-.hero-title {
-  font-size: 2.7rem;
-  font-weight: 800;
-  color: #0f172a;
-  line-height: 1.2;
-}
-
-@media (min-width: 992px) {
-  .hero-title {
-    font-size: 3.5rem;
-  }
+.hero-ps .container {
+  position: relative;
+  z-index: 2;
 }
 
 .hero-img-scaled {
-  max-width: 86%;
-  height: auto;
-  display: block;
-  margin: 0 auto;
-  border-radius: 18px;
-  box-shadow: 0 12px 32px rgba(0, 112, 209, 0.12);
-  border: 1px solid rgba(226, 232, 240, 0.9);
   animation: heroFloat 6s ease-in-out infinite;
   transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease;
   will-change: transform;
 }
 
 .hero-badge-floating {
-  position: absolute;
-  bottom: 12px;
-  left: 8%;
-  background-color: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.9);
-  border-radius: 12px;
-  padding: 0.4rem 0.85rem;
-  box-shadow: 0 10px 25px rgba(0, 112, 209, 0.12), 0 4px 10px rgba(0, 0, 0, 0.06);
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
   animation: heroFloat 5s ease-in-out infinite 1s;
 }
 
@@ -524,6 +681,7 @@ footer,
   animation: badgePulse 2.5s infinite;
 }
 
+/* PS Symbols Bar Micro-Interactions */
 .ps-symbols-bar {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -543,70 +701,12 @@ footer,
   transform: translateY(-4px) scale(1.4) rotate(15deg);
 }
 
+/* Ripple Button Effect */
 .btn-ps-blue,
 .btn-ps-red,
 .btn-ps-outline {
   position: relative;
   overflow: hidden;
-}
-
-.btn-ps-blue {
-  background: linear-gradient(135deg, #0070d1 0%, #0056a3 100%);
-  color: #ffffff !important;
-  font-weight: 700;
-  border: none;
-  padding: 0.75rem 1.6rem;
-  border-radius: 10px;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  box-shadow: 0 6px 18px rgba(0, 112, 209, 0.3);
-  transition: all 0.25s ease;
-}
-
-.btn-ps-blue:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 24px rgba(0, 112, 209, 0.45);
-}
-
-.btn-ps-red {
-  background: linear-gradient(135deg, #e60012 0%, #b8000e 100%);
-  color: #ffffff !important;
-  font-weight: 700;
-  border: none;
-  padding: 0.75rem 1.6rem;
-  border-radius: 10px;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  box-shadow: 0 6px 18px rgba(230, 0, 18, 0.3);
-  transition: all 0.25s ease;
-}
-
-.btn-ps-red:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 24px rgba(230, 0, 18, 0.45);
-}
-
-.btn-ps-outline {
-  background-color: #ffffff;
-  color: #0070d1 !important;
-  border: 2px solid #0070d1;
-  font-weight: 700;
-  padding: 0.7rem 1.5rem;
-  border-radius: 10px;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  transition: all 0.25s ease;
-}
-
-.btn-ps-outline:hover {
-  background-color: #e6f1fc;
-  transform: translateY(-2px);
 }
 
 .btn-ps-ripple {
@@ -618,44 +718,13 @@ footer,
   animation: rippleExpand 0.6s ease-out forwards;
 }
 
+/* Card Shimmer & 3D Tilt */
 .ps-card,
 .game-card,
 .faq-card {
-  background: #ffffff;
-  border: 1px solid rgba(226, 232, 240, 0.9);
-  border-top: 4px solid #0070d1;
-  border-radius: 16px;
-  padding: 1.9rem;
-  height: 100%;
-  box-shadow: 0 10px 30px rgba(0, 112, 209, 0.06), 0 2px 8px rgba(0, 0, 0, 0.03);
   transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s ease, border-color 0.35s ease;
   will-change: transform;
   transform-style: preserve-3d;
-  position: relative;
-}
-
-.ps-card:hover {
-  transform: translateY(-6px);
-  border-color: rgba(0, 112, 209, 0.4);
-  box-shadow: 0 20px 40px rgba(0, 112, 209, 0.14), 0 6px 12px rgba(0, 0, 0, 0.04);
-}
-
-.game-card {
-  border-top: 1px solid rgba(226, 232, 240, 0.9);
-  padding: 0;
-  overflow: hidden;
-}
-
-.game-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 20px 40px rgba(0, 112, 209, 0.14), 0 6px 12px rgba(0, 0, 0, 0.04);
-  border-color: #0070d1;
-}
-
-.faq-card {
-  border-top: 1px solid rgba(226, 232, 240, 0.9);
-  padding: 1.5rem;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.02);
 }
 
 .ps-card-featured-blue::before,
@@ -672,33 +741,32 @@ footer,
   animation: shimmerPass 4s infinite ease-in-out;
 }
 
+/* Scroll Reveal Base Classes */
 .reveal {
+  opacity: 0;
+  transform: translateY(35px);
   transition: opacity 0.75s cubic-bezier(0.215, 0.61, 0.355, 1), transform 0.75s cubic-bezier(0.215, 0.61, 0.355, 1);
   will-change: opacity, transform;
 }
 
-body.js-reveal .reveal:not(.active) {
-  opacity: 0;
-  transform: translateY(35px);
-}
-
-body.js-reveal .reveal.reveal-left:not(.active) {
+.reveal.reveal-left {
   transform: translateX(-40px);
 }
 
-body.js-reveal .reveal.reveal-right:not(.active) {
+.reveal.reveal-right {
   transform: translateX(40px);
 }
 
-body.js-reveal .reveal.reveal-scale:not(.active) {
+.reveal.reveal-scale {
   transform: scale(0.9) translateY(20px);
 }
 
 .reveal.active {
-  opacity: 1 !important;
-  transform: translateY(0) translateX(0) scale(1) !important;
+  opacity: 1;
+  transform: translateY(0) translateX(0) scale(1);
 }
 
+/* Stagger Delay Utilities */
 .stagger-1 {
   transition-delay: 0.1s;
 }
@@ -715,26 +783,9 @@ body.js-reveal .reveal.reveal-scale:not(.active) {
   transition-delay: 0.4s;
 }
 
+/* Interactive Hover Glow for Icons */
 .icon-box-badge {
-  width: 52px;
-  height: 52px;
-  border-radius: 12px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.35rem;
-  margin-bottom: 1rem;
   transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
-}
-
-.icon-box-blue {
-  background-color: #e6f1fc;
-  color: #0070d1;
-}
-
-.icon-box-red {
-  background-color: #feeaea;
-  color: #e60012;
 }
 
 .ps-card:hover .icon-box-badge {
@@ -753,6 +804,7 @@ body.js-reveal .reveal.reveal-scale:not(.active) {
   box-shadow: 0 6px 16px rgba(230, 0, 18, 0.35);
 }
 
+/* Animated Modal Pop-In */
 .modal.fade .modal-dialog {
   transform: scale(0.85) translateY(20px);
   transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -762,6 +814,9 @@ body.js-reveal .reveal.reveal-scale:not(.active) {
   transform: scale(1) translateY(0);
 }
 
+/* ----------------------------------------------------
+ * Interactive JS Additions
+ * ---------------------------------------------------- */
 header.scrolled {
   box-shadow: 0 8px 30px rgba(0, 112, 209, 0.12) !important;
 }
@@ -808,7 +863,6 @@ header.scrolled {
 }
 
 @keyframes floatUp {
-
   from {
     transform: translateY(30px);
     opacity: 0;
@@ -820,6 +874,7 @@ header.scrolled {
   }
 }
 
+/* Crimson Spiderman/Kratos Theme Variant */
 body.theme-red {
   background-color: #fdf8f8;
 }
