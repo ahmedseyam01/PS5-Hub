@@ -492,3 +492,91 @@ h1, h2, h3, h4, h5, h6, .navbar-brand-ps {
   border-top: 3px solid #e60012;
   padding: 2.5rem 0 1.5rem;
 }
+
+/* ----------------------------------------------------
+ * Interactive JS Additions
+ * ---------------------------------------------------- */
+header.scrolled {
+  box-shadow: 0 8px 30px rgba(0, 112, 209, 0.12) !important;
+}
+
+.nav-link-ps.active {
+  color: #0070d1 !important;
+  background-color: #e6f1fc;
+  font-weight: 700;
+}
+
+.btn-ps-theme-toggle {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  z-index: 1040;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0.65rem 1.2rem;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  transition: all 0.3s ease;
+}
+
+.btn-ps-theme-toggle:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.cart-floating-bar {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 1040;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  border: 1px solid rgba(230, 0, 18, 0.3);
+  padding: 0.8rem 1.4rem;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  animation: floatUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes floatUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Crimson Spiderman/Kratos Theme Variant */
+body.theme-red {
+  background-color: #fdf8f8;
+}
+
+body.theme-red .top-announcement-bar {
+  background: linear-gradient(90deg, #e60012 0%, #8b0000 100%);
+}
+
+body.theme-red .text-gradient-blue {
+  background: linear-gradient(135deg, #e60012 0%, #ff4d5a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+body.theme-red .brand-badge-blue {
+  background: linear-gradient(135deg, #e60012, #99000c);
+  box-shadow: 0 4px 14px rgba(230, 0, 18, 0.3);
+}
+
+body.theme-red .nav-link-ps:hover, body.theme-red .nav-link-ps.active {
+  color: #e60012 !important;
+  background-color: #feeaea;
+}
+
+body.theme-red .btn-ps-outline {
+  color: #e60012 !important;
+  border-color: #e60012;
+}
+
+body.theme-red .btn-ps-outline:hover {
+  background-color: #feeaea;
+}
+
