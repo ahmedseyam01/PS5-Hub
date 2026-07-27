@@ -129,14 +129,30 @@ function openGameModal(game) {
             </div>
           </div>
         </div>
-        <div class="modal-footer border-0 pt-0">
-          <a href="#location" data-bs-dismiss="modal" class="btn btn-ps-red w-100 justify-content-center">
-            <i class="bi bi-calendar-check me-1"></i> Book Station For This Game
+        <div class="modal-footer border-0 pt-0 flex-column gap-2">
+          <button id="btnBookThisGame" class="btn btn-ps-red w-100 justify-content-center">
+            <i class="bi bi-whatsapp me-1"></i> Book Station For This Game via WhatsApp
+          </button>
+          <a href="#location" data-bs-dismiss="modal" class="btn btn-ps-outline w-100 justify-content-center text-muted border-0 btn-sm">
+            Or Fill Reservation Form
           </a>
         </div>
       </div>
     </div>
   `;
+
+  const btnBook = modalEl.querySelector('#btnBookThisGame');
+  if (btnBook) {
+    btnBook.addEventListener('click', () => {
+      const msg = `Hello PlayStation Hub! I would like to reserve a PS5 station to play: ${game.title}. Please confirm availability.`;
+      showToast(`Opening WhatsApp to reserve station for ${game.title}... 🎮`);
+      const bsModal = bootstrap.Modal.getInstance(modalEl);
+      if (bsModal) bsModal.hide();
+      setTimeout(() => {
+        window.open(`https://wa.me/201000000000?text=${encodeURIComponent(msg)}`, '_blank');
+      }, 600);
+    });
+  }
 
   const bsModal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
   bsModal.show();
