@@ -1,8 +1,3 @@
-/**
- * PlayStation Hub - Main Interactive JavaScript
- * Author: Ahmed Seyam (ahmedseyam01)
- */
-
 document.addEventListener('DOMContentLoaded', () => {
   initNavbarScroll();
   initThemeToggle();
@@ -12,23 +7,18 @@ document.addEventListener('DOMContentLoaded', () => {
   initTooltipsAndToasts();
 });
 
-/* ----------------------------------------------------
- * 1. Navbar Scroll Effect & Active Section Tracking
- * ---------------------------------------------------- */
 function initNavbarScroll() {
   const header = document.querySelector('header');
   const navLinks = document.querySelectorAll('.nav-link-ps');
   const sections = document.querySelectorAll('section[id]');
 
   window.addEventListener('scroll', () => {
-    // Add shadow on scroll
     if (window.scrollY > 40) {
       header.classList.add('scrolled');
     } else {
       header.classList.remove('scrolled');
     }
 
-    // Active link highlighting based on scroll position
     let currentSection = '';
     sections.forEach(section => {
       const sectionTop = section.offsetTop - 100;
@@ -47,9 +37,6 @@ function initNavbarScroll() {
   });
 }
 
-/* ----------------------------------------------------
- * 2. PS5 Ambient Theme Toggler (DualSense Blue / Red)
- * ---------------------------------------------------- */
 function initThemeToggle() {
   const themeBtn = document.createElement('button');
   themeBtn.className = 'btn-ps-theme-toggle shadow-lg';
@@ -70,9 +57,6 @@ function initThemeToggle() {
   });
 }
 
-/* ----------------------------------------------------
- * 3. Interactive Game Cards Modal System
- * ---------------------------------------------------- */
 const GAMES_DATA = [
   { id: 1, title: 'EA Sports FC 25', category: 'Sports', rating: '4.9', players: '1-4 Players', img: 'images/game-fifa.jpg', desc: 'Latest rosters, Ultimate Team, and local kick-off tournaments.' },
   { id: 2, title: 'TEKKEN 8', category: 'Fighting', rating: '4.8', players: '1-2 Players', img: 'images/game-tekken.jpg', desc: 'Next-gen fighting graphics, 32 fighters, high speed combat.' },
@@ -154,17 +138,13 @@ function openGameModal(game) {
   bsModal.show();
 }
 
-/* ----------------------------------------------------
- * 4. Interactive Drinks & Snacks Order Cart
- * ---------------------------------------------------- */
 const cartState = [];
 
 function initMenuCart() {
   const menuItems = document.querySelectorAll('#cafe .menu-item');
   if (menuItems.length === 0) return;
 
-  // Add "Add" buttons to menu items
-  menuItems.forEach((item, index) => {
+  menuItems.forEach((item) => {
     const nameEl = item.querySelector('.menu-name');
     const priceEl = item.querySelector('[class^="menu-price"]');
     
@@ -192,7 +172,6 @@ function initMenuCart() {
     });
   });
 
-  // Create Floating Cart Bar
   const cartFloating = document.createElement('div');
   cartFloating.id = 'cartFloatingBar';
   cartFloating.className = 'cart-floating-bar shadow-lg d-none';
@@ -298,7 +277,6 @@ function openCartModal() {
     </div>
   `;
 
-  // Attach quantity change handlers
   modalEl.querySelectorAll('.btn-cart-inc').forEach(btn => {
     btn.addEventListener('click', (e) => {
       const idx = parseInt(e.currentTarget.dataset.index);
@@ -334,14 +312,10 @@ function openCartModal() {
   bsModal.show();
 }
 
-/* ----------------------------------------------------
- * 6. Interactive Reservation Form Handling
- * ---------------------------------------------------- */
 function initReservationForm() {
   const form = document.querySelector('#location form');
   if (!form) return;
 
-  // Replace default alert onsubmit with interactive handler
   form.onsubmit = null;
   form.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -353,7 +327,6 @@ function initReservationForm() {
 
     showToast(`Thank you ${name}! Your reservation request has been registered. 🎮`);
 
-    // Open WhatsApp pre-filled message
     const msg = `Hello PlayStation Hub! My name is ${name} (${phone}). I would like to reserve: ${roomText}. Please confirm availability.`;
     setTimeout(() => {
       window.open(`https://wa.me/201205298585?text=${encodeURIComponent(msg)}`, '_blank');
@@ -363,9 +336,6 @@ function initReservationForm() {
   });
 }
 
-/* ----------------------------------------------------
- * 7. Toast Notification System
- * ---------------------------------------------------- */
 function initTooltipsAndToasts() {
   let toastContainer = document.getElementById('psToastContainer');
   if (!toastContainer) {
