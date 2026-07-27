@@ -69,6 +69,17 @@ function initScrollReveal() {
     return;
   }
 
+  function checkViewport(el) {
+    const rect = el.getBoundingClientRect();
+    return rect.top < window.innerHeight && rect.bottom > 0;
+  }
+
+  reveals.forEach(el => {
+    if (checkViewport(el)) {
+      el.classList.add('active');
+    }
+  });
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -76,8 +87,8 @@ function initScrollReveal() {
       }
     });
   }, {
-    threshold: 0.12,
-    rootMargin: '0px 0px -40px 0px'
+    threshold: 0.05,
+    rootMargin: '50px 0px'
   });
 
   reveals.forEach(el => observer.observe(el));
