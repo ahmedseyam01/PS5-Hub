@@ -133,9 +133,9 @@ function openGameModal(game) {
           <button id="btnBookThisGame" class="btn btn-ps-red w-100 justify-content-center">
             <i class="bi bi-whatsapp me-1"></i> Book Station For This Game via WhatsApp
           </button>
-          <a href="#location" data-bs-dismiss="modal" class="btn btn-ps-outline w-100 justify-content-center text-muted border-0 btn-sm">
-            Or Fill Reservation Form
-          </a>
+          <button id="btnGoToForm" class="btn btn-ps-outline w-100 justify-content-center text-primary fw-semibold btn-sm">
+            <i class="bi bi-pencil-square me-1"></i> Or Fill Reservation Form
+          </button>
         </div>
       </div>
     </div>
@@ -151,6 +151,23 @@ function openGameModal(game) {
       setTimeout(() => {
         window.open(`https://wa.me/201000000000?text=${encodeURIComponent(msg)}`, '_blank');
       }, 600);
+    });
+  }
+
+  const btnGoToForm = modalEl.querySelector('#btnGoToForm');
+  if (btnGoToForm) {
+    btnGoToForm.addEventListener('click', () => {
+      const bsModal = bootstrap.Modal.getInstance(modalEl);
+      if (bsModal) bsModal.hide();
+      
+      const locSection = document.getElementById('location');
+      if (locSection) {
+        locSection.scrollIntoView({ behavior: 'smooth' });
+        const nameInput = document.getElementById('cName');
+        if (nameInput) {
+          setTimeout(() => nameInput.focus(), 500);
+        }
+      }
     });
   }
 
