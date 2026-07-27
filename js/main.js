@@ -6,6 +6,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   initNavbarScroll();
   initThemeToggle();
+  initGameCardModals();
   initRateCalculator();
   initMenuCart();
   initReservationForm();
@@ -68,6 +69,77 @@ function initThemeToggle() {
     localStorage.setItem('ps5_theme', isRed ? 'red' : 'blue');
     showToast(isRed ? '🔴 Switched to Crimson Spiderman Theme' : '🔵 Switched to Classic PlayStation Blue Theme');
   });
+}
+
+/* ----------------------------------------------------
+ * 3. Interactive Game Cards Modal System
+ * ---------------------------------------------------- */
+const GAMES_DATA = [
+  { id: 1, title: 'EA Sports FC 25', category: 'Sports', rating: '4.9', players: '1-4 Players', img: 'images/game-fifa.jpg', desc: 'Latest rosters, Ultimate Team, and local kick-off tournaments.' },
+  { id: 2, title: 'TEKKEN 8', category: 'Fighting', rating: '4.8', players: '1-2 Players', img: 'images/game-tekken.jpg', desc: 'Next-gen fighting graphics, 32 fighters, high speed combat.' },
+  { id: 3, title: 'Call of Duty MW3', category: 'Action', rating: '4.7', players: '1-4 Players', img: 'images/game-cod.jpg', desc: 'Fast multiplayer splitscreen & Warzone battle royale.' },
+  { id: 4, title: 'GTA V & God of War', category: 'Adventure', rating: '4.9', players: '1 Player', img: 'images/game-gta.jpg', desc: 'Stunning 4K 60FPS open world and epic mythological combat.' }
+];
+
+function initGameCardModals() {
+  const cards = document.querySelectorAll('#games .game-card');
+  cards.forEach((card, index) => {
+    card.style.cursor = 'pointer';
+    card.setAttribute('title', 'Click to view game details');
+    
+    card.addEventListener('click', () => {
+      const game = GAMES_DATA[index] || GAMES_DATA[0];
+      openGameModal(game);
+    });
+  });
+}
+
+function openGameModal(game) {
+  let modalEl = document.getElementById('gameDetailModal');
+  if (!modalEl) {
+    modalEl = document.createElement('div');
+    modalEl.id = 'gameDetailModal';
+    modalEl.className = 'modal fade';
+    modalEl.setAttribute('tabindex', '-1');
+    document.body.appendChild(modalEl);
+  }
+
+  modalEl.innerHTML = `
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content rounded-4 border-0 shadow-lg">
+        <div class="modal-header border-0 pb-0">
+          <h5 class="modal-title fw-bold text-dark"><i class="bi bi-controller text-danger me-2"></i>${game.title}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <img src="${game.img}" alt="${game.title}" class="img-fluid rounded-3 mb-3 shadow-sm w-100" style="max-height: 220px; object-fit: cover;">
+          <p class="text-muted small mb-3">${game.desc}</p>
+          <div class="d-flex justify-content-between align-items-center bg-light p-3 rounded-3 mb-3">
+            <div>
+              <span class="text-muted small d-block">Players</span>
+              <strong class="text-dark"><i class="bi bi-people-fill text-primary me-1"></i>${game.players}</strong>
+            </div>
+            <div>
+              <span class="text-muted small d-block">Rating</span>
+              <strong class="text-dark"><i class="bi bi-star-fill text-warning me-1"></i>${game.rating} / 5.0</strong>
+            </div>
+            <div>
+              <span class="text-muted small d-block">Resolution</span>
+              <strong class="text-dark"><i class="bi bi-tv text-danger me-1"></i>4K 120Hz</strong>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer border-0 pt-0">
+          <a href="#location" data-bs-dismiss="modal" class="btn btn-ps-red w-100 justify-content-center">
+            <i class="bi bi-calendar-check me-1"></i> Book Station For This Game
+          </a>
+        </div>
+      </div>
+    </div>
+  `;
+
+  const bsModal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
+  bsModal.show();
 }
 
 /* ----------------------------------------------------
