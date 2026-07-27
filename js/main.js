@@ -62,9 +62,6 @@ function initThemeToggle() {
   });
 }
 
-/* ----------------------------------------------------
- * Scroll Reveal Animations (Intersection Observer)
- * ---------------------------------------------------- */
 function initScrollReveal() {
   const reveals = document.querySelectorAll('.reveal');
   if (!('IntersectionObserver' in window)) {
@@ -86,9 +83,6 @@ function initScrollReveal() {
   reveals.forEach(el => observer.observe(el));
 }
 
-/* ----------------------------------------------------
- * PlayStation Floating Symbol Canvas Animation
- * ---------------------------------------------------- */
 function initParticleCanvas() {
   const canvas = document.getElementById('psParticleCanvas');
   if (!canvas) return;
@@ -97,8 +91,8 @@ function initParticleCanvas() {
   let width, height;
 
   function resize() {
-    width = canvas.width = canvas.parentElement.offsetWidth;
-    height = canvas.height = canvas.parentElement.offsetHeight;
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
   }
   resize();
   window.addEventListener('resize', resize);
@@ -107,29 +101,28 @@ function initParticleCanvas() {
   const colors = ['#00b06f', '#e60012', '#0070d1', '#df0067'];
 
   const particles = [];
-  const count = Math.min(Math.floor(width / 35), 28);
+  const count = Math.min(Math.floor((width * height) / 24000), 55);
 
   for (let i = 0; i < count; i++) {
     particles.push({
       x: Math.random() * width,
       y: Math.random() * height,
-      size: Math.random() * 14 + 12,
+      size: Math.random() * 16 + 14,
       shape: shapes[Math.floor(Math.random() * shapes.length)],
       color: colors[Math.floor(Math.random() * colors.length)],
-      vx: (Math.random() - 0.5) * 0.4,
-      vy: (Math.random() - 0.5) * 0.4,
+      vx: (Math.random() - 0.5) * 0.45,
+      vy: (Math.random() - 0.5) * 0.45,
       rotation: Math.random() * Math.PI * 2,
       vRot: (Math.random() - 0.5) * 0.015,
-      alpha: Math.random() * 0.35 + 0.15
+      alpha: Math.random() * 0.3 + 0.12
     });
   }
 
   let mouseX = width / 2;
   let mouseY = height / 2;
-  canvas.parentElement.addEventListener('mousemove', (e) => {
-    const rect = canvas.getBoundingClientRect();
-    mouseX = e.clientX - rect.left;
-    mouseY = e.clientY - rect.top;
+  window.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
   });
 
   function draw() {
@@ -140,18 +133,17 @@ function initParticleCanvas() {
       p.y += p.vy;
       p.rotation += p.vRot;
 
-      if (p.x < -20) p.x = width + 20;
-      if (p.x > width + 20) p.x = -20;
-      if (p.y < -20) p.y = height + 20;
-      if (p.y > height + 20) p.y = -20;
+      if (p.x < -30) p.x = width + 30;
+      if (p.x > width + 30) p.x = -30;
+      if (p.y < -30) p.y = height + 30;
+      if (p.y > height + 30) p.y = -30;
 
-      // Gentle mouse interaction
       const dx = mouseX - p.x;
       const dy = mouseY - p.y;
       const dist = Math.sqrt(dx * dx + dy * dy);
-      if (dist < 120) {
-        p.x -= (dx / dist) * 0.8;
-        p.y -= (dy / dist) * 0.8;
+      if (dist < 140) {
+        p.x -= (dx / dist) * 1.2;
+        p.y -= (dy / dist) * 1.2;
       }
 
       ctx.save();
@@ -172,9 +164,6 @@ function initParticleCanvas() {
   draw();
 }
 
-/* ----------------------------------------------------
- * 3D Interactive Card Tilt & Parallax Effect
- * ---------------------------------------------------- */
 function init3DTilt() {
   const cards = document.querySelectorAll('.ps-card, .game-card, .hero-img-scaled');
 
@@ -198,9 +187,6 @@ function init3DTilt() {
   });
 }
 
-/* ----------------------------------------------------
- * Number Counter Animation for Stats
- * ---------------------------------------------------- */
 function initCounterAnim() {
   const statNums = document.querySelectorAll('.stat-num');
   if (statNums.length === 0) return;
@@ -214,13 +200,13 @@ function initCounterAnim() {
         statNums.forEach(numEl => {
           const target = parseFloat(numEl.getAttribute('data-target'));
           const decimals = parseInt(numEl.getAttribute('data-decimals')) || 0;
-          const duration = 1800; // ms
+          const duration = 1800;
           const startTime = performance.now();
 
           function updateNum(currentTime) {
             const elapsed = currentTime - startTime;
             const progress = Math.min(elapsed / duration, 1);
-            const easeProgress = 1 - Math.pow(1 - progress, 3); // Ease out cubic
+            const easeProgress = 1 - Math.pow(1 - progress, 3);
             const currentVal = target * easeProgress;
 
             numEl.textContent = currentVal.toFixed(decimals);
@@ -240,9 +226,6 @@ function initCounterAnim() {
   if (heroSection) observer.observe(heroSection);
 }
 
-/* ----------------------------------------------------
- * Button Ripple Click Animation
- * ---------------------------------------------------- */
 function initRippleEffect() {
   const buttons = document.querySelectorAll('.btn-ps-blue, .btn-ps-red, .btn-ps-outline');
 
@@ -582,4 +565,3 @@ function showToast(message) {
     setTimeout(() => toastEl.remove(), 300);
   }, 4000);
 }
-
